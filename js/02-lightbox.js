@@ -15,24 +15,8 @@ const markup = galleryItems
 gallery.insertAdjacentHTML("beforeend", markup);
 
 // Ініціалізую бібліотеку SimpleLightbox
-let lightbox = new SimpleLightbox(".gallery a", {
-  options: {
-    captionsData: "alt",
-    captionPosition: "bottom",
-    captionDelay: 250,
-  },
+new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionDelay: 250,
 });
-
-gallery.addEventListener("click", galleryItemModalOpen);
-
-function galleryItemModalOpen(evt) {
-  evt.preventDefault();
-
-  if (!evt.target.classList.contains("gallery__image")) {
-    return;
-  }
-
-  lightbox.options.captionsData = "alt";
-  lightbox.options.captionDelay = 250;
-  lightbox.next();
-}

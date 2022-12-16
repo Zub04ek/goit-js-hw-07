@@ -39,20 +39,20 @@ function galleryItemModalOpen(evt) {
 
   // За допомогою підключеної бібліотеки basicLightbox створюю модальне вікно з більшим зображенням
   const instance = basicLightbox.create(
-    `<img src="${evt.target.dataset.source}" width="800" height="600">`
+    `<img src="${evt.target.dataset.source}" width="800" height="600">`,
+    {
+      onShow: () => window.addEventListener("keydown", onEscKeyPress),
+      onClose: () => window.removeEventListener("keydown", onEscKeyPress),
+    }
   );
 
   // Відкриваю модальне вікно
   instance.show();
 
-  // При відкритому модальному вікні додаю прослуховувач подій на клавіатуру
-  window.addEventListener("keydown", onEscKeyPress);
-
-  // Прописую умову функції, яка закриває модальне вікно при натисненні на клавішу Esc та знімає прослуховувач подій з клавіатури
+  // Прописую умову функції, яка закриває модальне вікно при натисненні на клавішу Esc
   function onEscKeyPress(evt) {
     if (evt.code === "Escape") {
       instance.close();
     }
-    window.removeEventListener("keydown", onEscKeyPress);
   }
 }
